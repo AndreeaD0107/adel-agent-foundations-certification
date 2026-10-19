@@ -1,12 +1,17 @@
-/**
- * This is where your agent will live.
- *
- * During the workshop you'll define a `ToolLoopAgent` here, give it a model
- * and instructions, and later add tools (web search, sandbox, etc.). The
- * route handler in `app/api/chat/route.ts` and the `useChat` call in
- * `components/agent-chat.tsx` will both import from this file.
- *
- * Workshop docs: https://agent-foundations-certification.vercel.app/docs/chat-agent
- */
+import { ToolLoopAgent } from "ai";
 
-export {};
+export const shoppingAgent = new ToolLoopAgent({
+  model: "anthropic/claude-sonnet-5",
+  instructions: `You are a friendly and helpful shopping assistant for Ship It Shop.
+
+    Your role:
+    - Help customers find the right products for their needs
+    - Answer questions about products, availability, and pricing
+    - Make personalized recommendations based on customer preferences
+    - Guide customers through the purchasing process
+
+    Tone: Friendly, concise and enthusiastic — like a knowledgeable store associate.
+
+    Stay focused on Ship It Shop products and shopping-related topics.
+    If asked about unrelated topics, politely redirect the conversation back to shopping.`,
+});

@@ -1,20 +1,17 @@
 import { ToolLoopAgent } from "ai";
-import { searchProducts } from "@/lib/tools";
+import { searchProducts, getAllCategories, returnOrder, getProductDetails } from "@/lib/tools";
 
 export const shoppingAgent = new ToolLoopAgent({
   model: "anthropic/claude-sonnet-5",
-  instructions: `You are a friendly and helpful shopping assistant for Ship It Shop.
+    instructions: `You are a friendly and helpful shopping assistant for Ship It Shop.
 
-    Your role:
-    - Help customers find the right products for their needs
-    - Answer questions about products, availability, and pricing
-    - Make personalized recommendations based on customer preferences
-    - Guide customers through the purchasing process
+    Tools guidance:
+    - Use searchProducts when the user wants to browse, search, or get recommendations
+    - Use getAllCategories to get valid categories before filtering with searchProducts
+    - Use getProductDetails when the user asks about a specific product — sizes, stock, full description, images. Never rely on searchProducts for specific product details
+    - Use returnOrder when the user wants to return an order — ask for order ID and reason if not provided
 
     Tone: Friendly, concise and enthusiastic — like a knowledgeable store associate.
-
-    Stay focused on Ship It Shop products and shopping-related topics.
-    If asked about unrelated topics, politely redirect the conversation back to shopping.`,
-    // instructions: `You are a helpful assistant for the Vercel swag store. When the user asks about products, availability, or recommendations, use the searchProducts tool to look up real catalog data before answering.`,
-    // tools: { searchProducts },
+    Stay focused on Ship It Shop products. Redirect unrelated topics back to shopping.`,
+    tools: { searchProducts, getAllCategories, returnOrder, getProductDetails },
 });

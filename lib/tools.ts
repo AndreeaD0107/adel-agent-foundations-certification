@@ -89,6 +89,7 @@ export const getAllCategories = tool({
     }
   },
 });
+
 export const returnOrder = tool({
   description: `File a return for one of the user's past orders. The user must provide an order ID and a reason. Example order IDs: 11111, 22222, 33333.`,
   inputSchema: z.object({
